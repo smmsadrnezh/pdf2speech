@@ -5,7 +5,7 @@ import asyncio
 
 pdf_path = "document.pdf"
 ignore_header_lines = 3
-voice = "en-GB-SoniaNeural"
+voice = "en-US-AriaNeural"
 
 
 def text_to_voice(text_path, voice_path):
