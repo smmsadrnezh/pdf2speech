@@ -4,18 +4,17 @@ import edge_tts
 import asyncio
 
 pdf_path = "document.pdf"
+ignore_header_lines = 3
+voice = "en-GB-SoniaNeural"
+
 
 def text_to_voice(text_path, voice_path):
-    VOICE = "en-GB-SoniaNeural"
-
     with open(text_path, 'r') as f:
-        communicate = edge_tts.Communicate(f.read(), VOICE)
+        communicate = edge_tts.Communicate(f.read(), voice)
         asyncio.run(communicate.save(voice_path))
 
 
 def fix_text(text_path, fix_path):
-    ignore_lines = 3
-
     def num_words_line(line):
         return len(line.split())
 
@@ -24,7 +23,7 @@ def fix_text(text_path, fix_path):
             previous = next(f)
             for line in f:
                 if '' in previous:
-                    for _ in range(ignore_lines):
+                    for _ in range(ignore_header_lines):
                         previous = next(f)
                 yield (previous, line)
                 previous = line
@@ -49,6 +48,7 @@ def main(pdf_path):
 
     voice_path = pdf_path.replace('.pdf', '.mp3')
     text_to_voice(fix_path, voice_path)
+
 
 if __name__ == '__main__':
     main(pdf_path)
