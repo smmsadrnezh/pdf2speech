@@ -1,14 +1,9 @@
 from transformers import BartForConditionalGeneration, BartTokenizer
 from pdfminer.high_level import extract_text_to_fp
 from pdfminer.layout import LAParams
+from settings import pdf_path, ignore_header_lines, summary_max_length, summary_min_length, voice
 import edge_tts
 import asyncio
-
-pdf_path = "document.pdf"
-ignore_header_lines = 3
-voice = "en-US-AriaNeural"
-summary_min_length = 100
-summary_max_length = 400
 
 
 def summarize_article(text_path):
@@ -18,7 +13,8 @@ def summarize_article(text_path):
 
     with open(text_path, 'r') as f:
         inputs = tokenizer.encode("summarize: " + f.read(), return_tensors="pt", max_length=1024, truncation=True)
-    summary_ids = model.generate(inputs, max_length=summary_max_length, min_length=summary_min_length, length_penalty=2.0, num_beams=4,
+    summary_ids = model.generate(inputs, max_length=summary_max_length, min_length=summary_min_length,
+                                 length_penalty=2.0, num_beams=4,
                                  early_stopping=True)
 
     summary = tokenizer.decode(summary_ids[0], skip_special_tokens=True)
