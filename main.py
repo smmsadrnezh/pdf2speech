@@ -3,6 +3,8 @@ from pdfminer.layout import LAParams
 import edge_tts
 import asyncio
 
+pdf_path = "document.pdf"
+
 def text_to_voice(text_path, voice_path):
     VOICE = "en-GB-SoniaNeural"
 
@@ -48,5 +50,5 @@ def main(pdf_path):
     voice_path = pdf_path.replace('.pdf', '.mp3')
     text_to_voice(fix_path, voice_path)
 
-
-main('document.pdf')
+if __name__ == '__main__':
+    main(pdf_path)
