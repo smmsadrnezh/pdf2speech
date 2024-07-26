@@ -1,5 +1,9 @@
 # pdf2speech
 
+You give this script a PDF file of the article. It will create a clean text in the form of a text file. The text in which the page headers have been deleted and the newlines are placed correctly. Then, it converts the text into an mp3 file and creates a summary text file using artificial intelligence.
+
+## How to use
+
 First, edit the `settings.py` file and change the `pdf_path` variable to the pdf file path you want to convert to speech. Here is the sample of the `settings.py` file:
 
 ```python
@@ -10,7 +14,7 @@ summary_min_length = 100
 summary_max_length = 400
 ```
 
-How to use:
+Run the script:
 
 ```bash
 git clone https://github.com/smmsadrnezh/pdf2speech.git
